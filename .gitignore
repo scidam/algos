@@ -1,0 +1,9 @@
+tmp
+*.py[oc]
+*.*~
+.project
+.pydevproject
+*.db
+*.pkl
+.idea
+.ipynb_checkpoints
