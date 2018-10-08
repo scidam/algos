@@ -30,6 +30,7 @@ from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.decomposition import PCA, KernelPCA
+from sklearn.manifold import TSNE
 
 
 from sklearn.pipeline import make_pipeline
@@ -158,11 +159,11 @@ PREPROCESSING_METHODS = (
                         },
                         
                         {'method': KernelPCA,
-                         'parameters': {'n_components': 10, 'kernel': 'linear'}
+                         'parameters': {'n_components': 10, 'random_state': 0, 'eigen_solver': 'arpack', 'max_iter': 400}
                         },
                
                         {'method': KernelPCA,
-                         'parameters': {'n_components': 10, 'kernel': 'rbf'}
+                         'parameters': {'n_components': 80, 'random_state': 0, 'eigen_solver': 'arpack', 'max_iter': 400}
                         },
 
                         )
