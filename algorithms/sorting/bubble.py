@@ -8,12 +8,13 @@ def bubble_sort(array, order='asc'):
     Bubble sorting algorithm
 
     This is a bit smart implementation of the bubble sorting algoritm.
-    It stops iterations if obtained sequence is already ordered.
+    It stops if obtained sequence is already ordered.
 
     **Parameters**
 
         :param array: an iterable to be sorted
-        :param order: a string, default values is `asc` stans
+        :param order: a string, defines ordering,  default value is `asc`
+                     (that is ascending order)
         :type array: list, tuple
         :type order: string
         :returns: sorted list of input values
