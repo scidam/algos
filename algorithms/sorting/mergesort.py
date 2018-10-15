@@ -22,7 +22,6 @@ def combine(left, right):
         combined.extend(right[::-1])
     return combined
 
-
 def test_combine():
     print('Testing combine function ... ')
     x = [1, 5, 12, 90]
@@ -31,43 +30,37 @@ def test_combine():
     result1 = combine(x, y)
     print("Combining y, x", y, x)
     result2 = combine(y, x)
-    print('Combining last example')
-    z = combine([7], [5, 6])
-    if result1 == result2 and z == [5, 6, 7]:
+    if result1 == result2:
         print("Test for the combine function is passed!")
     else:
         print("Something is wrong with the combine function!")
 
-
-def merge_sort(thelist, sorted=[]):
+def merge_sort(thelist, result=[]):
     '''
     Sorting by array merging.
     NOT COMPLETED YET!!!!
 
     '''
-    print("Called mergesort")
     n = len(thelist)
     if n == 1:
         left = [thelist[0]]
         right = []
         return left, right
-    elif n == 2:
-        left = [thelist[0]]
-        right = [thelist[1]]
-        return left, right
     else:
         left = thelist[:n//2]
         right = thelist[n//2:]
-    l, r = merge_sort(left, sorted=sorted)
+    l, r = merge_sort(left, result=[])
     combined_l = combine(l, r)
-    l, r = merge_sort(right, sorted=sorted)
+    l, r = merge_sort(right, result=[])
     combined_r = combine(l, r)
+    print("Combining... ", combined_l, combined_r)
+    result.extend(combine(combined_l, combined_r))
     return combined_l, combined_r
 
 
 if __name__ == '__main__':
     test_combine()
     array_reversed = list(range(10)[::-1])
-    l1, l2 = merge_sort(array_reversed)
-    result = combine(l1, l2)
+    result = []
+    l1, l2 = merge_sort(array_reversed, result=result)
     print('Result is ', result)
