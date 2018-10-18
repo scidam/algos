@@ -7,3 +7,4 @@ tmp
 *.pkl
 .idea
 .ipynb_checkpoints
+output
