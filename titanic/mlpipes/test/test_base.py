@@ -1,7 +1,7 @@
 
 import pytest
 import pandas as pd
-from .pfunc import drop_columns
+from ..pfunc import drop_columns
 
 
 
