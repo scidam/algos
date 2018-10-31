@@ -13,23 +13,27 @@ def check_type(itype=pd.DataFrame):
         @wraps(func)
         def wrapper(*args, **kwargs):
             if not isinstance(args[0], itype):
-                raise("First argument should be of type {}".fromat(itype))
+                raise(Exception("First argument should be an instance of {}".format(itype)))
             return func(*args, **kwargs)
         return wrapper
     return decorator
 
+
 def filter_colnames(df, colnames=None):
+    print("Colnames ", colnames)
     if isinstance(colnames, Iterable):
+        print("I am here", colnames)
         return [col for col in colnames if col in df.columns]
     return list()
 
-@check_type
+
+@check_type()
 def drop_columns(df, colnames=tuple()):
     """Drops specified columns from a DataFrame"""
+    return df.drop(filter_colnames(df, colnames), axis=1)
 
-    return df.drop(filter_colnames(colnames), axis=1)
 
-@check_type
+@check_type()
 def get_ohe(df, colnames=tuple(), prefix=None, drop=True):
     """Encodes specified df-columns in one-hot fashion"""
     colnames = filter_colnames(df, colnames)
@@ -39,7 +43,7 @@ def get_ohe(df, colnames=tuple(), prefix=None, drop=True):
     else:
         return pd.concat([df, auxiliary_df], axis=1)
 
-@check_type
+@check_type()
 def get_le(df, colnames=tuple(), prefix=None, drop=True):
 
     sep = '_'
@@ -65,7 +69,7 @@ def get_le(df, colnames=tuple(), prefix=None, drop=True):
     else:
         return (pd.concat([df, result_df], axis=1), labels)
 
-@check_type
+@check_type()
 def merge_categories(df, colnames=tuple(), mapping=dict()):
     """
 
@@ -88,7 +92,7 @@ def merge_categories(df, colnames=tuple(), mapping=dict()):
 
     return _df, mapping
 
-@check_type
+@check_type()
 def fill_na_simple(df, colnames=tuple(), methods=tuple()):
 
     if isinstance(methods, Iterable):
