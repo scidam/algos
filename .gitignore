@@ -8,3 +8,4 @@ tmp
 .idea
 .ipynb_checkpoints
 output
+.cache
