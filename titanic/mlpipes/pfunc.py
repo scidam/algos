@@ -20,9 +20,7 @@ def check_type(itype=pd.DataFrame):
 
 
 def filter_colnames(df, colnames=None):
-    print("Colnames ", colnames)
     if isinstance(colnames, Iterable):
-        print("I am here", colnames)
         return [col for col in colnames if col in df.columns]
     return list()
 
@@ -43,6 +41,7 @@ def get_ohe(df, colnames=tuple(), prefix=None, drop=True):
     else:
         return pd.concat([df, auxiliary_df], axis=1)
 
+
 @check_type()
 def get_le(df, colnames=tuple(), prefix=None, drop=True):
 
@@ -60,14 +59,16 @@ def get_le(df, colnames=tuple(), prefix=None, drop=True):
         prefix = 'LE'
 
     for col in colnames:
+        print('Evaluating col', col)
         encoded = enc.fit_transform(df.loc[:, col].values)
-        result_df[:, prefix + sep + col] = encoded
-        labels[col] = enc.classes_
+        result_df.loc[:, prefix + sep + col] = encoded
+        labels[col] = enc.classes_.tolist()
 
     if drop:
         return (pd.concat([df.drop(colnames, axis=1), result_df], axis=1), labels)
     else:
         return (pd.concat([df, result_df], axis=1), labels)
+
 
 @check_type()
 def merge_categories(df, colnames=tuple(), mapping=dict()):
@@ -81,14 +82,14 @@ def merge_categories(df, colnames=tuple(), mapping=dict()):
     if not colnames or not mapping:
         return df
 
-    if (set(df.colnames) - set(mapping.keys())):
+    if (set(df.columns.tolist()) - set(mapping.keys())):
         # check if mapping keys doesn't cover all colnames
         raise Exception("Mapping argument should cover all specified column names")
 
     _df = df.copy()
     for col in colnames:
         mask = df.loc[:, col].isin(mapping[col]['what'])
-        _df.loc[:, col][mask] = mapping[col]['to']
+        _df.loc[mask, col] = mapping[col]['to']
 
     return _df, mapping
 
@@ -120,6 +121,14 @@ def fill_na_simple(df, colnames=tuple(), methods=tuple()):
 
 
 
+
+# ---------  class names for sklearn pipelines --------
+get_le.__pipename__ = 'DataFrameLabelEncoder'
+get_ohe.__pipename__ = 'DataFrameOneHotEncoder'
+merge_categories.__pipename__ = 'MergeCategories'
+fill_na_simple.__pipename__ = 'FillNASimple'
+drop_columns.__pipename__ = 'DropColumns'
+# -----------------------------------------------------
 
 
 
