@@ -1,50 +1,10 @@
 
-# coding: utf-8
-
-# # Pipelining with Titanic Data
-
-# ### Data loading ...
-
-# In[1]:
-
-
-import matplotlib.pyplot as plt
 import pandas as pd
 train = pd.read_csv("./data/train.csv")
 test = pd.read_csv("./data/test.csv")
 
-
-# In[2]:
-
-
-train.head()
-
-
-# In[3]:
-
-
-test.head()
-
-
-# #### Some preprocessing of the data
-
-# It is likely that `PassengerId` or `Ticket` number don't affect on passenger survillance. So, lets drop these columns at the beggining.
-
-# In[4]:
-
-
 combined = pd.concat([train, test]).reset_index(drop=True)
 
-
-# In[5]:
-
-
-combined.shape
-
-
-# ## Utility functions and classes
-
-# In[6]:
 
 
 # self explanatory function, returns first name, title and the last name of a passenger

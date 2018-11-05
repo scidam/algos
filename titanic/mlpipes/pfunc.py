@@ -59,9 +59,13 @@ def get_le(df, colnames=tuple(), prefix=None, drop=True):
         prefix = 'LE'
 
     for col in colnames:
-        print('Evaluating col', col)
         encoded = enc.fit_transform(df.loc[:, col].values)
-        result_df.loc[:, prefix + sep + col] = encoded
+        if drop and not prefix:
+            result_df.loc[:, col] = encoded
+        elif prefix:
+            result_df.loc[:, prefix + sep + col] = encoded
+        else:
+            result_df.loc[:, sep + col] = encoded
         labels[col] = enc.classes_.tolist()
 
     if drop:
@@ -82,7 +86,7 @@ def merge_categories(df, colnames=tuple(), mapping=dict()):
     if not colnames or not mapping:
         return df
 
-    if (set(df.columns.tolist()) - set(mapping.keys())):
+    if (set(colnames) - set(mapping.keys())):
         # check if mapping keys doesn't cover all colnames
         raise Exception("Mapping argument should cover all specified column names")
 
@@ -94,7 +98,7 @@ def merge_categories(df, colnames=tuple(), mapping=dict()):
     return _df, mapping
 
 @check_type()
-def fill_na_simple(df, colnames=tuple(), methods=tuple()):
+def fill_na_simple(df, colnames=tuple(), methods=None):
 
     if isinstance(methods, Iterable):
         if len(colnames)!= len(methods):
@@ -107,18 +111,19 @@ def fill_na_simple(df, colnames=tuple(), methods=tuple()):
     colnames = filter_colnames(df, colnames)
 
     if len(methods) > len(colnames):
-        zipped = zip(colnames, itertools.cycle(methods))
-    else:
         zipped = zip(itertools.cycle(colnames), methods)
+    else:
+        zipped = zip(colnames, itertools.cycle(methods))
 
     res_df = df.copy()
+    method = None
     for col, met in zipped:
         if isinstance(met, Callable):
             method = met
-        value = method(res_df.loc[:, col].dropna().values)
-        res_df.loc[:, col].fillna(value, inplace=True)
+        if method is not None:
+            value = method(res_df.loc[:, col].dropna().values)
+            res_df.loc[:, col].fillna(value, inplace=True)
     return res_df
-
 
 
 

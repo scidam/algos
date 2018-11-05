@@ -39,6 +39,15 @@ def test_fill_na_simple():
     assert expected.equals(result)
 
 
+def test_fill_na_simple_wo_methods():
+    df = pd.DataFrame({'x': [1, np.nan, 2, 3, 2, 2, 2, 7],
+                       'y': [1, 2, 3, 4, 5, 6, np.nan, 8]})
+    result = fill_na_simple(df, colnames=('x', 'y'))
+    expected = pd.DataFrame({'x': [1.0, 2.0, 2.0, 3.0, 2.0, 2.0, 2.0, 7.0],
+                             'y': [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 4.0, 8.0]})
+    assert expected.equals(result)
+
+
 def test_fill_na_simple_categorica():
     df = pd.DataFrame({'x': [1, np.nan, 2, 3, 2, 2, 2, 7],
                        'y': ['a', 'a', 'b', 'a', 'a', 'a', None, 'c']})
@@ -70,10 +79,11 @@ def test_get_le():
     assert len(result_df.columns) == 4
 
 
-
-
-
-
-
-
-
+def test_get_le_wo_prefix():
+    df = pd.DataFrame({'x': ['a', 'b', 'b', 'c']})
+    result, _ = get_le(df, colnames=('x', ), prefix='', drop=True)
+    expected = pd.DataFrame({'x': [0, 1, 1, 2]})
+    assert expected.equals(result)
+    result, _ = get_le(df, colnames=('x',), prefix='', drop=False)
+    expected = pd.DataFrame({'x': ['a', 'b', 'b', 'c'], '_x': [0, 1, 1, 2]})
+    assert expected.equals(result)

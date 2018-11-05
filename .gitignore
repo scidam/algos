@@ -9,3 +9,4 @@ tmp
 .ipynb_checkpoints
 output
 .cache
+.pytest_cache

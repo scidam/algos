@@ -5,13 +5,17 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from .pfunc import (drop_columns, get_ohe, get_le, merge_categories,
                     fill_na_simple)
 
+# Declare all available (public) classes/functions manually
+__all__ = ('DataFrameLabelEncoder', 'DataFrameOneHotEncoder',
+           'MergeCategories', 'FillNASimple',
+           'DropColumns')
+
 
 class AbstractPreprocessor(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         return self
 
 
-# Probably it is better to create metaclass that do all the work!!! func -> pipeline model
 class BasePreprocessingMeta(type):
     def __new__(cls, clsname, bases, dct):
         return type.__new__(cls, clsname, bases, dct)
@@ -27,11 +31,7 @@ def _init_factory(varvalues=dict()):
 def _transform_factory(method=None):
     def transform(self, X, y=None):
         if method is not None:
-            print('The value is ', X)
-            print("Method is ", method)
-            varvalues= # TODO! rewrite varvalues 
-            result = method(X, **varvalues)
-            print("Result is ", result, varvalues)
+            result = method(X, **self.__dict__)
             if isinstance(result, tuple):
                 self.data_ = [x for x in result[1:]]
                 return result[0]
