@@ -85,5 +85,6 @@ def test_get_le_wo_prefix():
     expected = pd.DataFrame({'x': [0, 1, 1, 2]})
     assert expected.equals(result)
     result, _ = get_le(df, colnames=('x',), prefix='', drop=False)
-    expected = pd.DataFrame({'x': ['a', 'b', 'b', 'c'], '_x': [0, 1, 1, 2]})
+    expected = pd.DataFrame({'x': ['a', 'b', 'b', 'c'], '_x': [0, 1, 1, 2]},
+                            columns=['x', '_x'])
     assert expected.equals(result)
