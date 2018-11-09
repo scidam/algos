@@ -51,7 +51,9 @@ def sample_like_target(target, source, using=None, autoencode=False,
         S = pd.DataFrame(scaler.transform(S.values), columns=sc)
     combined = pd.concat([T, S]).reset_index(drop=True)
     distances = squareform(distance(combined))[:T.shape[0],:]
-    quantiles =  np.percentile(distances, quantile_use * 100, axis=1)
+    quantiles =  np.percentile(distances,
+                               quantile_use * 100 if quantle_use < 1.0\
+                               else quantile_use, axis=1)
     repeated = np.repeat(quantiles[:,np.newaxis], S.shape[0], axis=1)
     filter_mask = distances[:, T.shape[0]:] <= repeated
     to_leave = np.unique(np.repeat([leaved_indices], T.shape[0], axis=0)[filter_mask])
