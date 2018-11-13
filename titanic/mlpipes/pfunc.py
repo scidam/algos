@@ -137,3 +137,89 @@ drop_columns.__pipename__ = 'DropColumns'
 
 
 
+
+
+
+
+
+# ----------------------------------------------------------------- Revision needed!
+
+#class SelectFeatures(AbstractPreprocessor):
+    
+    #def __init__(self, k, n):
+        #self.k = k
+        #self.n = n
+
+    #def transform(self, X, y=None):
+        #_ = [int(x) for x in bin(self.k)[2:]]
+        #_ = [0] * (self.n - len(_)) + _
+        #return X.iloc[:, [j for j in range(self.n) if _[j]]]
+
+
+#class FillNaValues(AbstractPreprocessor):
+
+    #def __init__(self, name=None, train=None, n_features=None,
+                 #clf=RandomForestRegressor()):
+        #self.train = train
+        #self.name = name
+        #self.clf = clf
+        #self.n_features = n_features
+    
+    #def transform(self, X, y=None):
+
+        #if self.name is None: 
+            #return X
+
+        #if X.loc[:, self.name].isnull().sum() == 0:
+            #return X
+        
+        #_train = self.train.copy() if self.train is not None else X.copy()
+        #null_mask = _train[self.name].isnull()
+        #y = _train[self.name][~null_mask]
+        #_train = _train.drop(self.name, axis=1)
+        
+        #n_features = int(pd.np.ceil(X.shape[1] * 0.3) or self.n_features)
+        
+        #encoders = dict()
+        #for key in _train.columns.tolist():
+            #if not pd.np.issubdtype(_train[key].dtype, pd.np.number):
+                #_train.loc[_train[key].isnull(), key]  = 'N-a-N'
+                #le = LabelEncoder()
+                #_train[key] = le.fit_transform(_train[key])
+                #encoders[key] = le
+            #else:
+                #if any(_train[key].isnull()):
+                    #_train['%s_nan' % key] = 0.0
+                    #_train.loc[_train[key].isnull(), '%s_nan' % key] = 1.0
+                    #_train.loc[_train[key].isnull(), key] = _train.loc[~_train[key].isnull(), key].median()
+
+        #self.clf.fit(_train[~null_mask], y)
+        
+        ## dropping features
+        #if hasattr(self.clf, 'feature_importances_'):
+            ## drop columns and retrain classifier
+            #indices = pd.np.argsort(self.clf.feature_importances_)[::-1]
+            #features_to_drop = _train.columns[indices].values.tolist()[n_features:]
+            #self.clf.fit(_train.drop(features_to_drop, axis=1)[~null_mask], y)
+        #else:
+            #features_to_drop = []
+            
+        #_X = X.copy()
+        #for key in _train.columns:
+            #if key not in _X.columns:
+                #_X.loc[:, key] = 0.0
+        #_X = _X[_train.columns]
+        #for key in encoders.keys():
+            #if not pd.np.issubdtype(_X[key].dtype, pd.np.number):
+                #_X.loc[_X[key].isnull(), key]  = 'N-a-N'
+                #_X[key] = encoders[key].transform(_X[key])
+            #else:
+                #if any(_X[key].isnull()):
+                    #_X['%s_nan' % key] = 0.0
+                    #_X.loc[_X[key].isnull(), '%s_nan' % key] = 1.0
+                    #_X.loc[_X[key].isnull(), key] = X.loc[~_X[key].isnull(), key].median()
+        
+        #na_replacements = self.clf.predict(_X.drop(features_to_drop, axis=1)[null_mask])
+        #result = X.copy()
+        #result.loc[null_mask, self.name] = na_replacements
+        #return result
