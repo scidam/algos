@@ -16,14 +16,15 @@ def selection_sort(array, order='asc'):
     **Algorithm**
         The selection sort algorithm sorts an array by repeatedly
         finding the minimum or maximum element
-        from unsorted part and putting it at the beginning
+        from unsorted part and putting it at the beginning.
 
     **Complexity**
         :math:`O(n^2)`
 
     **Note**
         This is recursive implementation of the algorithm.
-        Be careful of using it with arrays of big size.
+        Be careful of using it with big arrays.
+        This is stable version of the selection sort algorithm.
 
     **Links**
         https://www.geeksforgeeks.org/selection-sort/
@@ -62,6 +63,9 @@ def selection_sort(array, order='asc'):
 
 def selection_sort_nonrecursive(array, order='asc'):
     """Non-recursive implementation of the selection sort algorithm
+
+    **Note**
+        This is unstable version of the selection sort algorithm
     """
 
     def sort_it(array):
@@ -88,6 +92,6 @@ if __name__ == '__main__':
     print("Array to be sorted: ", simple_array)
     print('Result is ', selection_sort(simple_array, order='desc'))
 
-    print("Using non-recursive implementatino of the algorithm: ")
+    print("Using non-recursive implementation of the algorithm: ")
     print('Result is ', selection_sort_nonrecursive(simple_array, order='desc'))
     print('Result is ', selection_sort_nonrecursive(array_reversed, order='asc'))
