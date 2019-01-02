@@ -4,7 +4,7 @@ __email__ = "kislov@easydan.com"
 
 
 def bubble_sort(array, order='asc'):
-    '''
+    """
     Bubble sorting algorithm
 
     This is a bit smart implementation of the bubble sorting algoritm.
@@ -20,7 +20,7 @@ def bubble_sort(array, order='asc'):
         :returns: sorted list of input values
         :rtype: list
 
-    '''
+    """
 
     from operator import lt, gt
     n = len(array)  # array size
