@@ -10,3 +10,4 @@ tmp
 output
 .cache
 .pytest_cache
+.vscode

@@ -4,7 +4,7 @@ __email__ = "kislov@easydan.com"
 
 
 def graham_convex_hull(array):
-    '''Graham's scan for convex hull of a set of 2D points
+    """Graham's scan for convex hull of a set of 2D points
 
        This algorithm is named after Ronald Graham, who published the original
        algorithm in 1972.
@@ -22,10 +22,10 @@ def graham_convex_hull(array):
         Graham, R.L. (1972). "An Efficient Algorithm for Determining the Convex
         Hull of a Finite Planar Set" (PDF). Information Processing Letters. 1:
         132–133. doi:10.1016/0020-0190(72)90045-2
-    '''
+    """
     import math
 
-    EPS = 1.0e-15 # very small number, epsilon1 value
+    EPS = 1.0e-15  # very small number, epsilon1 value
     # the lesser numbers are treated as zero
 
     if len(array) < 3:
@@ -78,17 +78,8 @@ def graham_convex_hull(array):
 
 
 if __name__ == '__main__':
-    test_data = [(2, 4),
-                 (1, 5),
-                 (2, -1),
-                 (7, 3),
-                 (5, 4),
-                 (2, 1),
-                 (7, 0),
-                 (3, 1),
-                 (4, 0),
-                 (3.2, 3)
-                 ]
+    test_data = [(2, 4), (1, 5), (2, -1), (7, 3), (5, 4), (2, 1), (7, 0),
+                 (3, 1), (4, 0), (3.2, 3)]
     try:
         import matplotlib.pyplot as plt
     except ImportError:
