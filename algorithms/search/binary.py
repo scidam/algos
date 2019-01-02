@@ -4,7 +4,7 @@ __email__ = "kislov@easydan.com"
 
 
 def binary_search(x, array):
-    '''Binary search algorithm
+    '''Binary search algorithm. Recursive implementation.
 
     **Parameters**
 
@@ -41,5 +41,5 @@ def binary_search(x, array):
 
 
 if __name__ == "__main__":
-    data = sorted([1,3,5,3,2,1,5,6,7,8,4,3,2,1,5])
+    data = sorted([1, 3, 5, 3, 2, 1, 5, 6, 7, 8, 4, 3, 2, 1, 5])
     print("Result is ", binary_search(6, data))
