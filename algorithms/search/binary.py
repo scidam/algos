@@ -13,6 +13,9 @@ def binary_search(x, array):
        :returns: the found object; if the object doesn't belong to the array
                  returns None
        :rtype: the same type as x or None
+    
+    **Complexity**
+        :math:`O(log(n))`
 
     '''
     if len(array) == 0:
@@ -42,4 +45,4 @@ def binary_search(x, array):
 
 if __name__ == "__main__":
     data = sorted([1, 3, 5, 3, 2, 1, 5, 6, 7, 8, 4, 3, 2, 1, 5])
-    print("Result is ", binary_search(6, data))
+    print("Result is ", binary_search(30, data))

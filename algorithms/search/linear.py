@@ -8,10 +8,13 @@ def linear_search(x, array):
 
     **Parameters**
 
-       :param x: an object, element of the array to be found
+       :param x: an object, the element to be found
        :param array: an array like object, e.g. list
        :returns: index of the element found or -1 if the element was not found
        :rtype: int
+
+    **Complexity**
+        :math:`O(n)`
 
     **Note**
         Use zero-indexing notation when do searching the elemnt.
