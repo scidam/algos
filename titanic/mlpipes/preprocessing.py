@@ -46,11 +46,11 @@ for key, obj in locals().copy().items():
     if isinstance(obj, Callable):
         if hasattr(obj, '__pipename__'):
             varvalues = dict()
-            original_func  = getattr(obj, '__wrapped__') if hasattr(obj, '__wrapped__') else obj
+            original_func = getattr(obj, '__wrapped__') if hasattr(obj, '__wrapped__') else obj
             for var, val in tuple(signature(original_func).parameters.items())[1:]:
                 varvalues[var] = val.default
             methods = {'__init__': _init_factory(varvalues),
                        'transform': _transform_factory(method=obj)}
             locals()[obj.__pipename__] = BasePreprocessingMeta(obj.__pipename__,
                                                                (AbstractPreprocessor,),
-                                                                methods)
+                                                               methods)
