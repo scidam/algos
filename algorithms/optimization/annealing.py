@@ -8,7 +8,7 @@ import numpy as np
 
 def simulated_annealing(f, bbox, t=lambda t: 1 / t ** 2, threshold=1.0e-8,
                         seed=None):
-    """Simulated annealing method
+    """Simulated annealing method.
 
     **Parameters**
 
@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     # function of two variables
 
-    g = lambda x: np.sin(x[0]) * np.cos(x[1]) + (x[0] + x[1]) ** 2 
+    g = lambda x: np.sin(x[0]) * np.cos(x[1]) + (x[0] + x[1]) ** 2
     bbox = [[0, 2 * np.pi], [0, 2 * np.pi]]
 
     optimum = simulated_annealing(g, bbox)
