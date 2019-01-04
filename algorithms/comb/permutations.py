@@ -4,7 +4,7 @@ __email__ = "kislov@easydan.com"
 
 
 def get_permutations(array):
-    """Returns all permutations for a given array
+    """Returns all permutations for a given array.
 
     **Parameters**
 

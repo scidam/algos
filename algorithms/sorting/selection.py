@@ -4,7 +4,7 @@ __email__ = "kislov@easydan.com"
 
 
 def selection_sort(array, order='asc'):
-    """Recursive implementation of the selection sort algorithm
+    """Recursive implementation of the selection sort algorithm.
 
     **Parameters**
 

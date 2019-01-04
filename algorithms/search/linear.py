@@ -4,7 +4,7 @@ __email__ = "kislov@easydan.com"
 
 
 def linear_search(x, array):
-    '''Linear search algorithm
+    '''Linear search algorithm.
 
     **Parameters**
 

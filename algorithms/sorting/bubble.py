@@ -4,8 +4,7 @@ __email__ = "kislov@easydan.com"
 
 
 def bubble_sort(array, order='asc'):
-    """
-    Bubble sorting algorithm
+    """Bubble sorting algorithm.
 
     This is a bit smart implementation of the bubble sorting algoritm.
     It stops if obtained sequence is already ordered.
@@ -23,9 +22,8 @@ def bubble_sort(array, order='asc'):
     """
 
     from operator import lt, gt
-    n = len(array)  # array size
+    n = len(array)
     sorted_array = list(array)
-    iterations = 0
     comparison = lt if order == 'desc' else gt
     for j in range(n):
         done = True
@@ -34,12 +32,9 @@ def bubble_sort(array, order='asc'):
                 sorted_array[i + 1], sorted_array[i] = \
                     sorted_array[i], sorted_array[i + 1]
                 done = False
-        iterations += 1
         if done:
             break
 
-    print("The number of iterations: {}".format(iterations))
-    # Note: The number of iterations is not the number of required comparisons!
     return sorted_array
 
 

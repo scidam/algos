@@ -3,26 +3,6 @@ __created__ = "15.10.2018"
 __email__ = "kislov@easydan.com"
 
 
-def test_combine():
-    ''' This function isn't a part of the algorithm.
-        It is just for testing purposes.
-    '''
-
-    print('Testing combine function ... ')
-    x = [1, 5, 12, 90]
-    y = [-2, -1, 0,  20, 21, 22, 110, 160, 500]
-    print("Combining x, y...", x, y)
-    result1 = combine(x, y)
-    print("Combining y, x...", y, x)
-    result2 = combine(y, x)
-    if result1 == result2:
-        print("combine(x, y) == combine(y, x)!")
-        print("The test for the combine function is passed!")
-    else:
-        print("combine(x, y) != combine(y, x)!")
-        print("Something went wrong when executing the combine function!")
-
-
 def combine(left, right):
     combined = []
     left = left[::-1]
@@ -44,8 +24,7 @@ def combine(left, right):
 
 
 def merge_sort(thelist, result=[], order='asc'):
-    '''
-    Sorting arrays by merging.
+    '''Sorting arrays by merging.
 
     **Parameters**
 
@@ -75,7 +54,6 @@ def merge_sort(thelist, result=[], order='asc'):
 
 
 if __name__ == '__main__':
-    test_combine()
     array_reversed = list(range(10)[::-1])
     print("Array to be sorted: ", array_reversed)
     result = []

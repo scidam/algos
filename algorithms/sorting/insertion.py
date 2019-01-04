@@ -4,7 +4,7 @@ __email__ = "kislov@easydan.com"
 
 
 def insertion_sort(array):
-    """Sort array by the insertion sort algorithm
+    """Sort array by the insertion sort algorithm.
 
     **Algorithm**
         Given an array X = [x1, ..., xN] the insertion sort
