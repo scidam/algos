@@ -44,6 +44,19 @@ def get_ohe(df, colnames=tuple(), prefix=None, drop=True):
 
 @check_type()
 def get_le(df, colnames=tuple(), prefix=None, drop=True):
+    """Label Encoder.
+
+    Performs label encoding on specified columns of a data frame.
+
+    **Parameters**
+
+        :param df: input data frame
+        :param colnames: a list of column names to be processed
+        :param prefix: use this prefix when setting names to processed columns
+        :param drop: default is True, drop original columns
+        :rtype: Pandas data frame
+        :returns: modified data frame
+    """
 
     sep = '_'
 
@@ -97,11 +110,12 @@ def merge_categories(df, colnames=tuple(), mapping=dict()):
 
     return _df, mapping
 
+
 @check_type()
 def fill_na_simple(df, colnames=tuple(), methods=None):
 
     if isinstance(methods, Iterable):
-        if len(colnames)!= len(methods):
+        if len(colnames) != len(methods):
             raise Exception('Colnames and methods arrays should have the same length')
     elif isinstance(methods, Callable):
         methods = (methods, )
@@ -124,7 +138,6 @@ def fill_na_simple(df, colnames=tuple(), methods=None):
             value = method(res_df.loc[:, col].dropna().values)
             res_df.loc[:, col].fillna(value, inplace=True)
     return res_df
-
 
 
 # ---------  class names for sklearn pipelines --------
