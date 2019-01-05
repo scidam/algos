@@ -51,4 +51,4 @@ def iterate_over_pars(pars, max_iterations=1000):
         yield result
         ind += 1
         if ind > max_iterations:
-            break
+            raise StopIteration
