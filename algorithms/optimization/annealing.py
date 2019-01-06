@@ -55,7 +55,7 @@ if __name__ == "__main__":
     bbox = [[0, 2 * np.pi]]
 
     optimum = simulated_annealing(f, bbox)
-    print("Maximum value is achieved at ", optimum, f(optimum))
+    print("Function of one variable: Maximum value is reached at ", optimum, f(optimum))
 
     # function of two variables
 
@@ -63,4 +63,4 @@ if __name__ == "__main__":
     bbox = [[0, 2 * np.pi], [0, 2 * np.pi]]
 
     optimum = simulated_annealing(g, bbox)
-    print("Maximum value is achieved at ", optimum, g(optimum))
+    print("Function of two variables: Maximum value is reached at ", optimum, g(optimum))
