@@ -9,3 +9,11 @@ https://github.com/numpy/numpy/blob/master/doc/source/reference/maskedarray.gene
 print np.sqrt(x/y) 
 https://docs.scipy.org/doc/numpy/reference/maskedarray.generic.html#rationale
 https://github.com/numpy/numpy/blob/master/doc/source/reference/maskedarray.generic.rst
+
+
+
+# multiple print statements (should be removed)
+https://docs.scipy.org/doc/numpy/reference/arrays.classes.html#arrays-classes
+
+
+
