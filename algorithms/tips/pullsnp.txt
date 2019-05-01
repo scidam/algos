@@ -1,0 +1,19 @@
+
+
+shoule be ma.masked_values instead of masked_values only.
+https://docs.scipy.org/doc/numpy/reference/maskedarray.generic.html#rationale
+https://github.com/numpy/numpy/blob/master/doc/source/reference/maskedarray.generic.rst
+
+
+# Need to add from __future__ import print_function, for python 2.x; switch to print()... all
+print np.sqrt(x/y) 
+https://docs.scipy.org/doc/numpy/reference/maskedarray.generic.html#rationale
+https://github.com/numpy/numpy/blob/master/doc/source/reference/maskedarray.generic.rst
+
+
+
+# multiple print statements (should be removed)
+https://docs.scipy.org/doc/numpy/reference/arrays.classes.html#arrays-classes
+
+
+
