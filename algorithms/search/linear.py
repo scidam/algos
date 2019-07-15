@@ -28,4 +28,4 @@ def linear_search(x, array):
 
 if __name__ == "__main__":
     data = [1, 3, 5, 3, 2, 1, 5, 6, 7, 8, 4, 3, 2, 1, 5]
-    print("Result is ", linear_search(5, data))
+    print("Trying to find 5, index: ", linear_search(5, data))
