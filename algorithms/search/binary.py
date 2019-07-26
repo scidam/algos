@@ -94,5 +94,7 @@ def binary_search_nonrecursive(x, array):
 if __name__ == "__main__":
     data = sorted([1, 3, 5, 3, 2, 1, 5, 6, 7, 8, 4, 3, 2, 1, 5])
     print("Source dataset is ", data)
-    print("Result is ", binary_search(30, data))
-    print("Result is ", binary_search_nonrecursive(8, data))
+    print("Trying to find 30, index: ",
+          binary_search(30, data))
+    print("Trying to find 8, index: ",
+          binary_search_nonrecursive(8, data))

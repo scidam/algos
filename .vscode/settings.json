@@ -3,5 +3,6 @@
     "python.linting.pylintEnabled": true,
     "python.linting.pep8Enabled": true,
     "editor.formatOnSave": false,
-    "python.formatting.provider": "yapf"
+    "python.formatting.provider": "yapf",
+    "python.pythonPath": "/home/dmitry/.pyenv/versions/sci/bin/python"
 }
