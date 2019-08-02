@@ -33,35 +33,14 @@ class Expression:
                   '**': op.pow,
                 }
 
-    op_func = {'sin': math.sin,
-               'cos': math.cos,
-               'tan': math.tan
-               }
-
-    operators = op_mapping.keys() + op_func.keys()
-
-    op_arity = {'+':  2,
-                '-':  2,
-                '**': 2,
-                '*':  2,
-                '/':  2,
-                'sin': 1,
-                'cos': 1,
-                'tan': 1}
-
     op_precedence = {
                 '+':   0,
                 '-':   0,
                 '*':   1,
                 '/':   1,
-                '(':   2,
-                ')':   0,
-                'sin': 1,
-                'cos': 1,
-                'tan': 1}   
+                '**':  1}   
 
     num_pat = r'(?:\d+|\d\.\d+)'
-    func_pat = r'(?:sin|cos|tan)'
     op_pat = r'(?:\(|\)|/|\*\*|\*|\+|\-)'
 
     def __init__(self, expression):
@@ -72,7 +51,30 @@ class Expression:
         self._tokens = None
 
     def get_precedence(self, op):
-        return self.op_precedence.get(op, None) or raise Exception("Unknown operator {}.".format(op))
+        res = self.op_precedence.get(op, None)
+        if res is not None:
+            return res
+        else:
+            raise Exception("Unknown operator {}.".format(op))
+    
+    @staticmethod
+    def to_numeric(val):
+        try:
+            res = float(val)
+        except ValueError:
+            raise
+        return res
+
+    def apply_and_push(self, op=None):
+        if op:
+            c_op = op
+        else:
+            c_op = self._op_stack.pop() if self._op_stack else None
+        if c_op is not None:
+            right = self.to_numeric(self._val_stack.pop())
+            left = self.to_numeric(self._val_stack.pop())
+            self._val_stack.append(self.op_mapping.get(c_op)(left, right))
+        return c_op
 
     def evaluate(self):
         """Shunting  yard algorithm implementation"""
@@ -81,46 +83,31 @@ class Expression:
         if self._tokens is None:
             self._tokens = self.tokenizer()
 
-        done = False
         for token in self._tokens:
             if re.match(self.num_pat, token):
                 self._val_stack.append(token)
+
             elif token == '(':
-                self._brackets.append(token)
-            elif token == ')':
-                # evaluate here!!!!
-                c_op = ''
-                while c_op != '(':
-                    c_op = self._op_stack.pop()
-            
-            else: 
                 self._op_stack.append(token)
-        
-        paren_count = 0
+            elif token == ')':
+                c_op = self._op_stack.pop() if self._op_stack else None
+                while c_op is not None and c_op != '(':
+                    self.apply_and_push(op=c_op)
+                    c_op = self._op_stack.pop() if self._op_stack else None
+            else:
+                top_op = self._op_stack[-1] if self._op_stack else None
+                while top_op is not None and top_op not in "()" and\
+                    self.get_precedence(top_op) >= self.get_precedence(token):
+                    top_op = self.apply_and_push()
+                self._op_stack.append(token)
 
-        while self._op_stack:
-            c_op = self._op_stack.pop()
-            if c_op == ')':
-                paren_count += 1
-                continue
-            elif c_op == '(':
-                paren_count -= 1
-                continue
-            elif c_op in self.operators:
-                arity = self.op_arity.get(c_op)
-                if arity == 2:
-                    b = self._val_stack.pop()
-                    a = self._val_stack.pop()
-                    self._val_stack.append(self.op_func.get(c_op)(a, b))
-                elif arity == 1:
-                    self._val_stack.append(self.op_func.get(c_op)(self._val_stack.pop()))
-                else:
-                    raise Exception("Unknown arity or operator!")
-
+        top_op = self._op_stack[-1] if self._op_stack else None
+        while top_op is not None:
+            top_op = self.apply_and_push()
+        return self._val_stack.pop()
 
     def tokenizer(self):
-        any_pat = re.compile('(' + '|'.join([self.func_pat,
-                                             self.op_pat,
+        any_pat = re.compile('(' + '|'.join([self.op_pat,
                                              self.num_pat]) + ')')
         tokens = any_pat.findall(self.expression)
         return tokens
@@ -128,8 +115,8 @@ class Expression:
 
 # ========================= main execution part ========================
 def main():
-    exp = Expression('3 + 6 * (2 + 6) - sin(cos(3) ** sin(4) + 8 * (1 + 2))')
-    print(exp.tokenizer())
+    exp = Expression('1**2**3**4')
+    print("Answer is ", exp.evaluate())
 # ======================================================================
 
 
