@@ -6,11 +6,15 @@ Dmitry E. Kislov
 E-mail: kislov@easydan.com
 Date: 02-Aug-2019
 """
+
+
 import operator as op
 import re
 
+
 class Expression:
-    """This is implementation of the Shunting yard algorithm proposed by E. Dejkstra"""
+    """This is implementation of the Shunting yard algorithm
+    proposed by E. Dejkstra"""
 
     op_mapping = {
                   '+':  op.add,
@@ -19,14 +23,12 @@ class Expression:
                   '/':  op.truediv,
                   '**': op.pow,
                 }
-
     op_precedence = {
                 '+':   0,
                 '-':   0,
                 '*':   1,
                 '/':   1,
                 '**':  1}   
-
     num_pat = r'(?:\d+|\d\.\d+)'
     op_pat = r'(?:\(|\)|/|\*\*|\*|\+|\-)'
 
@@ -43,7 +45,7 @@ class Expression:
             return res
         else:
             raise Exception("Unknown operator {}.".format(op))
-    
+
     @staticmethod
     def to_numeric(val):
         try:
