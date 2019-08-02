@@ -1,26 +1,13 @@
-"""
-Shunting yard algorithm
-========================
-
-Fully asynchronous implementation of shunting-yard algorithm.
-
-
-Usage
-=====
+"""Simple Shunting Yard Algorithm
 
 Author
 ======
 Dmitry E. Kislov
 E-mail: kislov@easydan.com
+Date: 02-Aug-2019
 """
-
-import asyncio
-import aiohttp
 import operator as op
-import math
 import re
-
-#= ========    Base clases definition ===========
 
 class Expression:
     """This is implementation of the Shunting yard algorithm proposed by E. Dejkstra"""
@@ -115,10 +102,9 @@ class Expression:
 
 # ========================= main execution part ========================
 def main():
-    exp = Expression('1**2**3**4')
+    exp = Expression('1+2*(3+4)-12')
     print("Answer is ", exp.evaluate())
 # ======================================================================
-
 
 if __name__ == "__main__":
     main()
