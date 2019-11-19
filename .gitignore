@@ -10,3 +10,5 @@ tmp
 output
 .cache
 .pytest_cache
+.python-version
+.vscode
