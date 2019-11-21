@@ -21,34 +21,8 @@ def quicksort(arr):
     pivot = arr[-1]
     left = quicksort([el for el in arr if el < pivot])
     right = quicksort([el for el in arr if el > pivot])
-
     right = [pivot] * arr.count(pivot) + right[:]
-
-    # merge left and right parts
-
-    if len(left) == 0 or len(right) == 0:
-        return left + right
-
-    if left and right and left[-1] <= right[0]:
-        return left + right
-
-    result = list()
-    lind = 0
-    rind = 0
-    while lind != len(left) - 1 and  rind != len(right) - 1:
-        l = left[lind]
-        r = right[rind]
-        if l <= r:
-            result.append(l)
-            lind += 1
-        else:
-            result.append(r)
-            rind += 1
-    if lind >= len(left) - 1:
-        result += right[rind:]
-    if rind >= len(right) - 1:
-        result = left[lind:] + result
-    return result
+    return left + right
 
 
 import random
