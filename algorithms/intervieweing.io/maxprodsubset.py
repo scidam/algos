@@ -12,4 +12,4 @@ def maxprod_subset(arr):
     _arr = list(filter(lambda x: x > 0, _arr))
     return exp(sum(_arr))
 
-print(maxprod_subset(arr))  # That almost exact answer.
+print(maxprod_subset(arr))  # Almost exact answer.
