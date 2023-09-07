@@ -17,4 +17,3 @@ class Solution:
             right += 1
 
         return len(s) == left + 1 and s[-1] == t[-1]
-     -
