@@ -12,7 +12,7 @@ class Solution:
         result = [[None] * n for _ in range(n)]
         cdir = next(direction)
         while nums:
-            time.sleep(1)
+            # time.sleep(1)
             _i, _j = i, j
             if cdir == "right":
                 j += 1
@@ -22,7 +22,7 @@ class Solution:
                 j -= 1
             elif cdir == "up":
                 i -= 1
-            print(f"i={i}, j={j}, direction={cdir}, nums={nums}")
+            # print(f"i={i}, j={j}, direction={cdir}, nums={nums}")
             if j < 0 or j > n - 1 or i < 0 or i > n - 1:
                 cdir = next(direction)
                 i, j = _i, _j
