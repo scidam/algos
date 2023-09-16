@@ -9,9 +9,6 @@ class Solution:
             for i in range(len(triangle), -1, -1):
                 if triangle[i][_k-1] < 
                 sum += min(triangle[i][_k-1], triangle[i][_k])
-        
-            
-        
 
 # i, k<i
 
